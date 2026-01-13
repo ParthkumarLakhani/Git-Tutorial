@@ -1,0 +1,273 @@
+# Adding and Committing Changes
+
+
+git status     -s / -v / -b
+
+To see what's changed since the last commit. It shows all the files that have been added and modified and are ready to be committed and files that are untracked.
+
+
+
+git add       filename / . / -p
+
+git add moves changes from the working directory to the staging area. It tells Git: “I want these changes to be included in the next commit.”
+
+
+git add .
+  Stages all changes in the current directory and below.
+  Modified files
+  New files
+  Does NOT stage deleted files outside current directory
+
+Example : You are in /project/src
+git add .
+
+It will stage:
+src/file1.js
+src/file2.js
+
+It will NOT stage:
+README.md   (outside src)
+
+
+git add -A (or git add --all)
+Stages ALL changes in the entire repository, no matter where you run it from.
+  Modified files
+  New files
+  Deleted files
+  Renamed files
+
+
+git add -p (patch mode) ⭐ MOST IMPORTANT
+Stages changes interactively, chunk by chunk. Git asks you: “Do you want to stage THIS change?”
+
+Example
+git add -p
+
+You’ll see something like:
+
+  diff --git a/app.js b/app.js
+  @@ -10,6 +10,8 @@
+  +console.log("debug");
+
+
+Git asks:
+  Stage this hunk? (y/n/s/e/q/?)
+  
+| Key | Meaning                   |
+| --- | ------------------------- |
+| `y` | stage this chunk          |
+| `n` | skip this chunk           |
+| `s` | split into smaller chunks |
+| `e` | manually edit             |
+| `q` | quit                      |
+| `?` | help                      |
+
+
+
+
+
+git commit     
+git commit permanently saves the staged changes into Git history. It creates a snapshot of your project at that moment.
+
+git commit -m "" 
+
+internally
+
+Takes everything in staging area
+Creates a snapshot
+Assigns a unique commit ID (SHA)
+Stores message
+
+
+Production message convention (recommended)
+<type>: <short summary>
+
+message like
+feat: add login API
+fix: resolve null pointer issue
+refactor: optimize DB query
+chore: update dependencies
+
+
+git commit --amend ⭐ VERY IMPORTANT
+This modifies the most recent commit instead of creating a new one. ➡️ Think: “Oops, let me fix my last commit.”
+
+Please don't use this. This is history rewriting
+
+Very Important Rule (Production)
+DO NOT amend a pushed commit
+  This causes:
+    History mismatch
+    Team conflicts
+    Broken branches
+
+
+
+git add = choose what to save
+git commit = actually save it
+
+
+
+
+
+git rm
+
+| Command                    | Removes from Git | Deletes local file |
+| -------------------------- | ---------------- | ------------------ |
+| `git rm file.txt`          | ✅ Yes            | ✅ Yes              |
+| `git rm --cached file.txt` | ✅ Yes            | ❌ No               |
+
+
+
+
+
+
+
+
+
+
+# Viewing History
+
+git log    --oneline for compact, --graph for visual branches, --author="Name" to filter.
+Show commit history.
+
+
+git diff      git diff HEAD for all unstaged, git diff <commit1> <commit2> to compare.
+Show changes between working dir and staging.
+
+
+git show commitId
+
+
+
+
+
+
+
+
+
+
+
+
+# Undoing Changes
+
+git restore file.txt
+
+Discards unstaged changes in a file
+Restores file to last committed state
+
+When to use:
+  You edited a file
+  You don’t want those changes
+  You did NOT run git add
+
+
+Notes
+Replacement for:    git checkout -- file.txt
+  Safe for beginners
+  Works only on unstaged changes
+
+
+
+git restore --staged file.txt
+
+Removes file from staging area
+Keeps changes in working directory
+
+When to use:
+  You ran git add by mistake
+  You want to unstage, not delete changes
+
+
+Notes
+  Very safe
+  Does not delete code
+  Best alternative to git reset <file>
+
+
+
+
+
+git reset HEAD~1
+
+Removes last commit
+Keeps file changes
+Changes become unstaged
+
+When to use
+  You made a commit
+  You realize it was wrong
+  Commit is NOT pushed
+
+
+
+Notes
+HEAD~1 = one commit back
+
+For multiple commits:
+git reset HEAD~3
+
+Default is --mixed
+
+⚠️ Dangerous version
+git reset --hard HEAD~1
+
+❌ Deletes commit
+❌ Deletes code
+❌ No recovery (for beginners)
+
+
+
+
+git revert <commit> ⭐ SAFEST FOR TEAMS
+
+Creates a new commit
+That undoes a previous commit
+
+When to use
+  Commit already pushed
+  You work in a team
+  You want safe history
+
+Example
+git log --oneline
+
+abc123 Add payment logic
+
+Undo it:
+git revert abc123
+
+Creates:
+def456 Revert "Add payment logic"
+
+
+Notes
+Does NOT delete history
+Very safe
+Used in production
+
+
+Summary Table
+| Situation             | Command                     | Safe? |
+| --------------------- | --------------------------- | ----- |
+| Undo unstaged changes | `git restore file`          | ✅     |
+| Unstage file          | `git restore --staged file` | ✅     |
+| Undo local commit     | `git reset HEAD~1`          | ⚠️    |
+| Undo pushed commit    | `git revert commit`         | ✅     |
+
+
+
+
+Memory Trick
+
+restore → working/staging area
+reset → commits (history rewrite)
+revert → new undo commit (safe)
+
+
+
+Real-World Rule (VERY IMPORTANT)
+
+❌ Never rewrite history on shared branches
+✅ Use git revert for pushed commits
+

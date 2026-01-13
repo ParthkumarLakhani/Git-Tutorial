@@ -23,3 +23,16 @@ Tag: A label for a commit (e.g., v1.0 for releases).
 
 Git's model: Changes → Stage → Commit → Push/Pull.
 
+
+
+File states
+Each file in a working tree can have the following states:
+
+Untracked — a new file was added to the working tree but it's not tracked by Git yet. You can start to track it by using git add command (see below).
+
+Modified — the changes were made in the working tree but not yet staged for commit (in other words, these changes are not added to the current index).
+
+Staged — the changes were added to the index. This way, they will become a part of the next commit.
+
+Commited — the changes were added to the project history as a part of a commit. All commits are stored in the .git folder.
+

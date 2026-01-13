@@ -1,0 +1,8 @@
+Two ways to setup repo
+
+1. using clone
+2. add remote repo
+
+if you are using clone then some system don't need to run git init.
+but if you are using 2 method then you need to used first git init.
+
