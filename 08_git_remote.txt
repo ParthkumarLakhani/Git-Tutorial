@@ -1,0 +1,150 @@
+# Remotes and Syncing
+
+# What is a remote ?? 🌍
+A remote is a reference to another Git repository, usually:
+  GitHub
+  GitLab
+  Bitbucket
+Your local repo ⟷ Remote repo
+
+
+1️⃣ git remote add <name> <url>
+git remote add origin https://github.com/user/repo.git
+
+What it does
+  Adds a remote connection
+  Gives it a short name (usually origin)
+
+Why origin?
+  Just a convention
+  You can name it anything:
+    git remote add upstream https://github.com/org/repo.git
+
+
+Check remotes
+git remote -v
+
+
+Notes
+  Does NOT push or pull
+  Just saves the URL
+  One-time setup
+
+
+
+2️⃣ git remote -v
+
+What it does
+  Lists all remotes
+  Shows fetch and push URLs
+
+Notes
+  Useful for verifying correct repo
+  Helps avoid pushing to wrong repo 😬
+
+
+
+
+3️⃣ git push <remote> <branch>
+
+git push origin main
+
+What it does
+  Sends local commits to the remote
+  Updates remote branch
+
+
+Notes
+  Push only works if branch is up to date
+  Fails if remote has newer commits
+
+
+
+
+4️⃣ git pull <remote> <branch>
+
+git pull origin main
+
+What it does
+  Fetches changes
+  Immediately merges them
+
+
+➡️ Equivalent to:
+git fetch origin
+git merge origin/main
+
+
+
+Potential risk ⚠️
+
+Auto-merge can cause conflicts
+Harder to inspect changes first
+
+
+Safer alternative (recommended)
+git pull --rebase
+
+Keeps history clean.
+
+
+Notes
+  Use pull for quick sync
+  Use fetch when cautious
+
+
+
+
+5️⃣ git fetch <remote> ⭐ SAFEST
+git fetch origin
+
+What it does
+  Downloads remote changes
+  Does NOT touch your code
+  No merge, no conflict
+
+After fetch
+git status
+Your branch is behind 'origin/main'
+
+Inspect changes:
+
+git log origin/main
+git diff main origin/main
+
+
+Notes
+  100% safe
+  Preferred in professional teams
+  Lets you review before merging
+
+
+
+Comparison
+| Task          | Command          | Safe |
+| ------------- | ---------------- | ---- |
+| Add remote    | `git remote add` | ✅    |
+| View remotes  | `git remote -v`  | ✅    |
+| Push code     | `git push`       | ⚠️   |
+| Pull + merge  | `git pull`       | ⚠️   |
+| Download only | `git fetch`      | ✅    |
+
+
+
+
+Real Company Workflow 🏢
+
+git fetch origin
+git diff main origin/main
+git merge origin/main
+git push
+
+
+
+Interview One-Liners 💡
+
+Remote = link to another repo
+fetch downloads only
+pull = fetch + merge
+push -u sets upstream
+
