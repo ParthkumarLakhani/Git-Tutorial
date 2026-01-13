@@ -1,0 +1,47 @@
+Installing Git
+
+Download: From git-scm.com. Available for Windows, macOS, Linux.
+Verify: Run git --version in your terminal/command prompt.
+
+Configure Basics:
+
+Set your name: git config --global user.name "Your Name"
+Set your email: git config --global user.email "your@email.com"
+Default editor: git config --global core.editor vim (or nano, code, etc.)
+
+git config --list
+
+
+
+Global Configuration (--global):
+
+This applies to all repositories on your machine for your user account.
+It's stored in a file like ~/.gitconfig (on Linux/Mac) or similar on Windows.
+Use it for settings you want everywhere, like your name, email, or default editor.
+
+
+Local Configuration (--local or no flag):
+
+This applies only to the current repository you're working in.
+It's stored in the .git/config file inside that specific repo.
+Useful for repo-specific settings, like overriding global ones (e.g., a different email for a work project).
+
+
+
+Default Editor in Git
+The command git config --global core.editor vim (or with other editors like nano, code for VS Code, etc.) sets the default text editor that Git uses for tasks requiring editing, such as:
+
+Writing commit messages (e.g., during git commit without -m).
+Resolving merge conflicts.
+Editing rebase instructions.
+
+Why set it? Git defaults to something like vi or vim if not specified, but you can change it to your preferred editor.
+Examples:
+  Vim: git config --global core.editor vim
+  Nano (easier for beginners): git config --global core.editor nano
+  VS Code: git config --global core.editor "code --wait" (the --wait ensures Git waits for you to close the editor).
+  Emacs: git config --global core.editor emacs
+
+
+
+Pro Tip: Use SSH for secure remote access instead of HTTPS (avoids password prompts). Generate keys with ssh-keygen and add to GitHub.
