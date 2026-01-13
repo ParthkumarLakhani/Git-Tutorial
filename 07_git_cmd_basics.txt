@@ -1,0 +1,150 @@
+# Branches
+
+
+A branch is just a pointer to a commit. Think of it as:  “A separate line of work”
+
+main → stable production code
+feature/* → new features
+bugfix/* → fixes
+
+
+
+git branch     : Lists local branches, * shows current branch
+
+git branch -a   : Show all branches (local + remote)
+
+Notes
+  Does NOT switch branches
+  Safe read-only command
+
+
+git branch <name>    : Creates a new branch, Does NOT switch to it
+
+git checkout <branch> (old way)   : Switches to another branch, Updates working directory
+
+git checkout -b feature/new      : Create + switch
+
+Notes
+  Older but still common
+  Also used for restoring files (confusing)
+
+
+git switch <branch> ⭐ Modern & Recommended
+What it does
+  Switch branches
+  Clear intent (only for branches)
+
+
+git switch -c feature/new             : Create + switch
+
+Notes
+  Safer than checkout
+  Beginner-friendly
+  Introduced to reduce confusion
+
+
+
+git branch -d <branch>    : Deletes a local branch, Only if merged
+
+Why Git blocks deletion?
+To prevent losing work.
+
+git branch -D old-branch
+
+
+
+git merge <branch>   : Merges another branch into current branch
+git merge feature/new
+
+
+
+git switch main
+git merge feature/new
+
+
+Merge Types
+
+1️⃣ Fast-forward merge ✅
+If no new commits on main:
+No merge commit created.
+
+2️⃣ Merge commit 🔀
+If both branches changed:
+merge commit
+
+3️⃣ Merge conflicts ⚠️
+Occurs when:  
+  Same lines modified in both branches
+
+Git will ask you to:
+  Manually resolve
+  Add files
+  Commit merge
+
+
+
+Branch Commands Comparison
+| Task                 | Command              |
+| -------------------- | -------------------- |
+| List branches        | `git branch`         |
+| Create branch        | `git branch name`    |
+| Switch branch        | `git switch name`    |
+| Create + switch      | `git switch -c name` |
+| Delete merged branch | `git branch -d name` |
+| Merge branch         | `git merge name`     |
+
+
+
+## what is difference between checkout and switch ??
+
+Why are there TWO commands ?
+Originally, git checkout did too many things:
+
+Switch branches ❌
+Create branches ❌
+Restore files ❌
+
+This caused confusion and mistakes.
+
+👉 So Git introduced:
+
+git switch → only for branches
+git restore → only for files
+
+Clear intent, fewer accidents ✅
+
+
+
+git checkout
+
+What it can do (many things)
+
+git checkout main            # switch branch
+git checkout -b feature/new  # create + switch
+git checkout -- file.txt     # restore file
+
+
+Problem ❌   One command doing 3 different jobs.
+
+
+When people make mistakes
+git checkout file.txt
+
+They think they’re switching branch — but they discard changes 😬
+
+
+Key Differences Table
+| Feature            | git checkout | git switch |
+| ------------------ | ------------ | ---------- |
+| Switch branches    | ✅            | ✅          |
+| Create branch      | ✅ (`-b`)     | ✅ (`-c`)   |
+| Restore files      | ✅            | ❌          |
+| Risk of data loss  | ⚠️ High       | ✅ Low      |
+| Beginner friendly  | ❌            | ✅          |
+| Modern recommended | ❌            | ✅          |
+
+
+
+
+
+
