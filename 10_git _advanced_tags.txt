@@ -1,0 +1,139 @@
+# Tags
+Tags mark specific commits (e.g., releases)
+
+
+What is a Tag ?? 🏷️
+A tag is a label attached to a specific commit.
+
+Think of it as: “This commit = version 1.0”
+
+Common uses:
+  Releases (v1.0.0)
+  Hotfix points
+  Production deployments
+
+
+Tag vs Branch (Very Important)
+
+| Branch               | Tag                 |
+| -------------------- | ------------------- |
+| Moves forward        | Fixed               |
+| Used for development | Used for marking    |
+| Can change           | Immutable reference |
+
+
+
+1️⃣ git tag <name> — Lightweight Tag
+
+git tag v1.0
+
+What it does
+  Creates a lightweight tag
+  Points to current commit
+
+Check tags
+  git tag
+
+Push tag to remote
+  git push origin v1.0
+
+
+Notes
+  No message
+  No author/date metadata
+  Fast but limited
+
+
+
+2️⃣ git tag -a <name> -m "message" ⭐ Annotated Tag (Recommended)
+
+git tag -a v1.0 -m "Release 1.0"
+
+What it does
+  Creates an annotated tag
+  Stores:
+    Tagger name
+    Date
+    Message
+
+
+View tag details
+git show v1.0
+
+Why annotated tags?
+  Better for releases
+  Signed possible (-s)
+  Industry standard
+
+
+Push annotated tag
+  git push origin v1.0
+
+Or push all tags:
+  git push origin --tags
+
+
+
+3️⃣ git tag -d <name> — Delete Tag
+
+git tag -d v1.0
+
+What it does
+  Deletes local tag only
+
+
+Delete remote tag
+  git push origin --delete v1.0
+
+
+Notes
+  Local and remote tags are independent
+  Deleting locally does NOT delete remote
+
+
+
+Tag a Past Commit
+
+git tag -a v1.0 abc123 -m "Release 1.0"
+
+Used when:
+  Release decided later
+  Tagging production commit
+
+
+
+Real Company Workflow 🏢
+git checkout main
+git pull
+git tag -a v2.3.0 -m "Release v2.3.0"
+git push origin v2.3.0
+
+
+
+Semantic Versioning (Very Common)
+vMAJOR.MINOR.PATCH
+v2.1.4
+| Change          | Version |
+| --------------- | ------- |
+| Breaking change | MAJOR   |
+| New feature     | MINOR   |
+| Bug fix         | PATCH   |
+
+
+
+
+Interview One-Liners 💡
+
+Tag = fixed pointer to commit
+Lightweight vs Annotated
+Annotated preferred for releases
+Tags don’t move like branches
+
+
+Golden Rules 🛑
+
+✔ Use annotated tags for releases
+✔ Never retag released versions
+✔ Push tags explicitly
+✔ Keep tags immutable
+

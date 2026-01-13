@@ -162,4 +162,6 @@ Merge = record history
 Rebase = rewrite history
 
 
+Pro Tip: Merge for shared work (preserves history); Rebase for local cleanup.
+
 
