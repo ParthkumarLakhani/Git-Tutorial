@@ -1,0 +1,25 @@
+# Core Git Concepts (Beginner Level)
+
+
+Repository (Repo): A folder tracked by Git, containing files and .git (hidden folder with history).
+
+Working Directory: Your current files.
+
+Staging Area (Index): Files ready to be committed (via git add).
+
+Commit: A snapshot of changes with a message, author, timestamp, and unique SHA-1 hash (e.g., abc123).
+
+Branch: A lightweight pointer to a commit. Default is main (formerly master).
+
+HEAD: Points to the current branch/commit you're on.
+
+Remote: A version of your repo elsewhere (e.g., on GitHub).
+
+Merge: Combine branches.
+
+Conflict: When changes overlap; Git prompts manual resolution.
+
+Tag: A label for a commit (e.g., v1.0 for releases).
+
+Git's model: Changes → Stage → Commit → Push/Pull.
+
