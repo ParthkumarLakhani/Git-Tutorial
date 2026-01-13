@@ -1,0 +1,173 @@
+# Cherry-Picking and Bisect
+
+🌿 Git Cherry-pick
+
+What is git cherry-pick ??
+git cherry-pick takes a specific commit from another branch and applies it to your current branch.
+👉 Think of it as: “I want this one commit only, not the whole branch.”
+
+git cherry-pick <commit-hash>
+
+Example
+git cherry-pick abc123
+
+This:
+  Copies commit abc123
+  Applies it on top of your current branch
+  Creates a new commit with the same changes (different hash)
+
+
+When to Use Cherry-pick
+
+✅ Hotfix from another branch
+✅ Bring a single bug fix into main
+✅ Avoid merging entire feature branch
+
+
+
+Real-world Scenario
+main
+  |
+  |---A---B
+              feature-x
+                |
+                C---D (bug fix here)
+
+If you only want commit D:
+git checkout main
+git cherry-pick <hash-of-D>
+
+✔️ Now main has that fix without merging feature-x.
+
+
+
+
+Cherry-pick Multiple Commits
+
+git cherry-pick a1b2c3 d4e5f6
+
+Or a range:
+
+git cherry-pick a1b2c3..d4e5f6
+
+
+
+
+Conflict Handling
+
+If conflicts occur:
+
+  # fix conflicts manually
+  git add .
+  git cherry-pick --continue
+
+
+Cancel cherry-pick:
+
+  git cherry-pick --abort
+
+
+⚠️ Caution
+  Duplicates commit history
+  Avoid cherry-picking large features
+  Fine for small fixes only
+
+
+
+
+
+
+
+
+
+
+# 🔍 Git Bisect
+
+What is git bisect?
+git bisect helps you find the exact commit that introduced a bug using binary search.
+👉 Instead of checking 100 commits one by one, Git finds it in ~7 steps.
+
+How Bisect Works
+  1.You tell Git:
+      One good commit
+      One bad commit
+  2.Git checks the middle commit
+  3.You test it and mark it good/bad
+  4.Git repeats until it finds the culprit
+
+
+Start Bisect
+  git bisect start
+
+
+Mark Bad (Current Commit)
+  git bisect bad
+
+
+Mark Good (Older Commit)
+  git bisect good <commit-hash>
+
+Example:
+  git bisect good v1.0
+
+
+
+
+Git Auto-checkout
+
+Git will now:
+  Checkout a commit
+  Ask you to test
+
+After testing:
+  git bisect good   # if bug not present
+  git bisect bad    # if bug present
+
+Repeat until Git says:
+  abc123 is the first bad commit
+🎯 Bug found
+
+
+End Bisect
+  git bisect reset
+
+
+Returns you to original branch.
+
+
+
+Automation (Advanced / Production)
+  git bisect run npm test
+
+
+Git automatically:
+  Runs tests
+  Marks good/bad
+  Finds the bug commit
+
+
+
+When to Use Bisect
+
+✅ Bug introduced recently
+✅ Regression issues
+✅ Large commit history
+❌ Not useful if bug is non-deterministic
+
+
+
+🧠 Cherry-pick vs Merge vs Rebase
+| Feature  | Cherry-pick | Merge               | Rebase        |
+| -------- | ----------- | ------------------- | ------------- |
+| Commits  | Single      | All                 | All           |
+| History  | Duplicate   | Preserved           | Rewritten     |
+| Use case | Hotfix      | Feature integration | Clean history |
+
+
+
+✅ Production Best Practices
+
+✔ Use cherry-pick for hotfixes only
+✔ Use merge for shared branches
+✔ Use rebase before pushing personal branches
+✔ Use bisect when tests can detect bugs
