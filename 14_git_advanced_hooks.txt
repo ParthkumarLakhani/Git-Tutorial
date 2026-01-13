@@ -1,0 +1,121 @@
+#Hooks (Automation)
+Hooks are scripts that run on Git events (e.g., pre-commit).
+
+Located in .git/hooks/.
+Example: pre-commit to run linters.
+Production: Use tools like Husky for JS projects.
+
+
+🪝 Git Hooks (Automation in Git)
+What are Git Hooks?
+
+Git Hooks are scripts that automatically run when certain Git events happen.
+
+Example events:
+  Before commit
+  After commit
+  Before push
+  After merge
+
+👉 They help enforce rules, run checks, and prevent bad code from entering a repo.
+
+
+Where Hooks Live
+  .git/hooks/
+
+Inside you’ll see:
+  pre-commit.sample
+  commit-msg.sample
+  pre-push.sample
+
+⚠️ These .sample files do nothing until renamed.
+
+
+
+
+How Hooks Work (Simple Flow)
+
+You run: git commit
+↓
+Git triggers: pre-commit hook
+↓
+Script runs
+↓
+✔ success → commit proceeds
+❌ failure → commit blocked
+
+
+
+
+Common Hooks You Should Know
+| Hook         | When it runs   | Common Use             |
+| ------------ | -------------- | ---------------------- |
+| `pre-commit` | Before commit  | Linting, formatting    |
+| `commit-msg` | Commit message | Enforce commit format  |
+| `pre-push`   | Before push    | Run tests              |
+| `post-merge` | After merge    | Install deps           |
+| `pre-rebase` | Before rebase  | Block dangerous rebase |
+
+
+
+⚠️ Important Limitations of Git Hooks
+
+❌ Hooks are NOT version controlled
+  .git/hooks is local
+  Not shared with team by default
+
+👉 This is why tools exist.
+
+
+
+🏭 Production Approach (IMPORTANT)
+Why Not Plain Git Hooks?
+| Problem        | Reason                     |
+| -------------- | -------------------------- |
+| Not shared     | Each dev must set manually |
+| Hard to manage | Different OS               |
+| Easy to skip   | `--no-verify`              |
+
+
+
+✅ Solution: Husky (Most Common)
+Husky manages Git hooks inside your repo
+
+
+
+
+Common Production Hooks
+| Hook       | Purpose              |
+| ---------- | -------------------- |
+| pre-commit | ESLint, Prettier     |
+| commit-msg | Conventional commits |
+| pre-push   | Run tests            |
+| post-merge | npm install          |
+
+
+
+Git Hooks vs CI/CD
+| Git Hooks      | CI/CD             |
+| -------------- | ----------------- |
+| Local          | Remote            |
+| Fast feedback  | Final gate        |
+| Can be skipped | Cannot be skipped |
+
+
+
+Best Practices 🔥
+
+✔ Keep hooks fast
+✔ Use Husky for teams
+✔ Don’t block commits with slow tests
+✔ Enforce formatting early
+✔ Use CI as final authority|
+
+
+
+
+Interview Answer (Short)
+
+“Git hooks are scripts that run automatically on Git events like pre-commit or pre-push, used to enforce code quality. In production, tools like Husky are used to version-control and manage hooks across teams.”
+
+

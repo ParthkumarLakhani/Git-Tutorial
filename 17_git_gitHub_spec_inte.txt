@@ -1,0 +1,19 @@
+# GitHub-Specific Features and Integration
+
+1.  Creating a Repo: On GitHub, click "New" → Set name, public/private → Clone locally.
+
+2.  Forking: Copy someone's repo to your account for contributions.
+
+3.  Pull Requests (PRs):
+      From a branch/fork, create PR to merge into base (e.g., main).
+      Reviews, comments, approvals.
+      Squash merge for clean history.
+
+4.  Issues and Projects: Track bugs/features. Use labels, milestones.
+
+5.  GitHub Actions: YAML workflows for CI/CD (build, test, deploy on push/PR).
+      Example: .github/workflows/ci.yml with jobs like npm test.
+
+6.  Codespaces: Browser-based IDE for quick edits.
+
+7.  Security: Dependabot for vuln scans, secret scanning.

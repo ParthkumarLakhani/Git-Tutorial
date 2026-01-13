@@ -1,0 +1,129 @@
+# Git Reflog (Recovery)
+
+What is git reflog?
+
+git reflog shows every movement of HEAD — even actions that rewrote or deleted history.
+
+👉 Unlike git log, reflog never lies (locally).
+
+
+
+Why Reflog Exists
+
+Some Git commands rewrite history:
+
+  git reset
+  git rebase
+  git commit --amend
+  git checkout
+  git pull --rebase
+
+After these:
+❌ commits may disappear from git log
+✅ but reflog still remembers them
+
+
+Basic Command   git reflog
+
+Output Example
+a1b2c3d HEAD@{0}: commit: fix login bug
+e4f5g6h HEAD@{1}: reset: moving to HEAD~1
+i7j8k9l HEAD@{2}: commit: add login API
+
+
+How to Read This
+| Part       | Meaning              |
+| ---------- | -------------------- |
+| `HEAD@{0}` | Current state        |
+| `HEAD@{1}` | Previous state       |
+| Message    | What action happened |
+
+
+
+🔥 Most Important Use Case: Recover Lost Commit
+
+Scenario: You ran
+  git reset --hard HEAD~1
+
+
+💥 Commit disappeared
+
+Step 1: Open reflog
+git reflog
+
+You see:
+  abc1234 HEAD@{1}: commit: important feature
+
+
+Step 2: Recover it
+  Option 1: Checkout (inspect safely)
+    git checkout abc1234
+
+  Option 2: Restore branch to that commit
+    git reset --hard abc1234
+  ✔ Commit is back
+
+  Option 3: Create a new branch (SAFEST)
+    git branch recovery abc1234
+  👉 This is production-safe recovery
+
+
+
+Recover After Rebase Gone Wrong
+  git reflog
+  git reset --hard HEAD@{3}
+
+
+Recover After commit --amend
+Even overwritten commits:
+  git reflog
+  git checkout <old-commit-hash>
+
+
+Reflog vs Log
+
+| Feature               | git log | git reflog     |
+| --------------------- | ------- | -------------- |
+| Shows commits         | ✅       | ✅              |
+| Shows deleted commits | ❌       | ✅              |
+| Tracks HEAD movement  | ❌       | ✅              |
+| Shared                | ✅       | ❌ (local only) |
+
+
+
+How Long Reflog Keeps Data?
+By default:
+  90 days for reachable commits
+  30 days for unreachable commits
+(Configurable via Git GC)
+
+
+
+
+Important Warnings ⚠️
+❌ Reflog is local only
+Cannot recover commits deleted and pushed to remote by someone else
+❌ Garbage collection removes old reflog entries
+
+
+
+Production Best Practices
+
+✔ Use reflog before panic
+✔ Create recovery branch first
+✔ Never force-push without backup
+✔ Teach team reflog basics
+
+
+
+
+Golden Recovery Pattern 🏆
+  git reflog
+  git branch backup HEAD@{n}
+
+
+Interview One-liner 🎯
+
+“git reflog tracks all local HEAD movements, allowing recovery of commits lost due to reset, rebase, or amend.”
+
+

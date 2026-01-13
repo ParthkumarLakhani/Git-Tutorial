@@ -1,0 +1,222 @@
+#  ⚙️ Advanced Git Config & Productivity
+
+🔹 Git Aliases (Work Faster)
+
+What are Aliases?
+Aliases let you create short names for long Git commands.
+
+👉 They are pure shortcuts, not new commands.
+
+
+Create an Alias:
+  git config --global alias.co checkout
+Now instead of:
+  git checkout main
+You can type:
+  git co main
+
+
+
+Common Useful Aliases (Production)
+
+git config --global alias.br branch
+git config --global alias.st status
+git config --global alias.cm commit
+git config --global alias.last "log -1 HEAD"
+git config --global alias.graph "log --oneline --decorate --graph --all"
+
+
+Use Shell Commands in Aliases
+  git config --global alias.undo "reset --soft HEAD~1"
+
+See All Aliases
+  git config --global --get-regexp alias
+
+Where Aliases Are Stored
+  ~/.gitconfig
+
+Example:
+  [alias]
+    co = checkout
+    st = status
+    graph = log --oneline --decorate --graph --all
+
+
+
+
+
+
+🔹 .gitignore (Ignore Files Properly)
+
+What is .gitignore?
+Tells Git which files NOT to track.
+
+Examples:
+
+  node_modules/
+  .env
+  *.log
+  dist/
+
+
+Important Rules
+
+✔ Applies only to untracked files
+❌ Does NOT remove already tracked files
+
+
+To stop tracking:
+  git rm --cached file.txt
+
+
+
+Common .gitignore Examples
+Node.js
+
+  node_modules/
+  .env
+  dist/
+  npm-debug.log*
+
+
+OS files
+
+  .DS_Store
+  Thumbs.db
+
+
+Best Practice
+
+✔ Commit .gitignore
+✔ Keep secrets out (.env)
+✔ Use templates (github/gitignore)
+
+
+
+
+
+
+
+
+
+🔹 Global Git Ignore
+Why Global Ignore?
+Some files are personal, not project-specific:
+  OS junk
+  Editor configs
+
+
+Create Global Ignore
+  touch ~/.gitignore_global
+
+Add:
+  .DS_Store
+  .vscode/
+  .idea/
+
+Tell Git to Use It
+git config --global core.excludesfile ~/.gitignore_global
+
+
+Result
+✔ Works for all repos
+✔ Not committed
+
+
+
+
+
+
+
+
+
+🔹 Git LFS (Large File Storage)
+
+Why Git LFS Exists
+
+Git is bad at:
+  Large binaries
+  Media files
+  Frequent binary updates
+❌ Bloated repo
+❌ Slow clone
+
+
+
+Git LFS Solution
+
+Git LFS:
+  Stores pointer files in Git
+  Stores actual binary elsewhere
+
+
+When to Use Git LFS
+
+✔ Files > 50–100 MB
+✔ PSD, videos, models
+✔ ML datasets
+
+
+
+please check the setup
+
+
+
+Git LFS Limitations ⚠️
+
+❌ Storage/bandwidth limits (GitHub has quotas)
+❌ Requires Git LFS installed
+❌ Not ideal for extremely large datasets
+
+
+
+
+
+
+
+
+Git LFS vs Normal Git
+
+| Feature         | Git        | Git LFS |
+| --------------- | ---------- | ------- |
+| Stores binaries | ❌ bad     | ✅ good |
+| Repo size       | Grows fast | Small   |
+| Clone speed     | Slow       | Faster  |
+| History         | Heavy      | Light   |
+
+
+
+
+
+
+
+Production Best Practices 🔥
+Aliases
+
+✔ Standardize common aliases
+✔ Document team aliases (optional)
+
+
+Ignore Files
+
+✔ .gitignore committed
+✔ Global ignore for personal tools
+
+
+Git LFS
+
+✔ Track before committing large files
+✔ Monitor storage usage
+✔ Don’t LFS everything blindly
+
+
+
+
+
+Interview One-liners 🎯
+
+Aliases:  “Git aliases are shortcuts defined in git config to speed up commonly used commands.”
+
+.gitignore:  “.gitignore prevents untracked files from being added to version control.”
+
+Git LFS:  “Git LFS stores large files outside Git history while keeping lightweight pointers in the repo.”
