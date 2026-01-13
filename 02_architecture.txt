@@ -1,0 +1,24 @@
+# Architecture
+
+Three main areas
+  Working Directory → Staging Area → Repository
+
+
+
+1. Working Directory
+
+  Your actual project files
+  Where you write code
+
+
+2. Staging Area (Index)
+
+  Files ready to be committed
+  Like a “review before save”
+
+
+3. Repository (.git)
+
+  Permanent history
+  Each commit stored here
+
