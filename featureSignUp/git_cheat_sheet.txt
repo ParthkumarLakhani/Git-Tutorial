@@ -1,0 +1,10 @@
+
+Two way to use git 
+
+1. using clone method
+
+2. using remote -v method
+
+
+
+
