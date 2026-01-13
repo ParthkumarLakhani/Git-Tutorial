@@ -1,0 +1,165 @@
+# Rebasing (Alternative to Merge)
+Rebasing rewrites history by moving commits onto another base.
+
+
+What is Rebase ??
+Rebasing = moving your commits to a new base commit
+
+In simple words:  “Pretend my work was done on top of the latest code.”
+
+⚠️ Rebase rewrites commit history.
+
+
+
+Merge vs Rebase (Big Picture)
+
+Merge (safe, keeps history)
+main ──●──●─────●
+        \        /
+         feature─●
+Creates a merge commit.
+
+
+Rebase (clean, linear)
+main ──●──●──●──●
+                ↑
+            feature commits replayed
+No merge commit.
+
+
+
+
+1️⃣ git rebase <base>
+git rebase main
+
+What it does
+  Takes commits from current branch
+  Replays them on top of main
+
+
+Example workflow
+git switch feature/login
+git rebase main
+
+Before:
+main:     A──B
+feature:     └──C──D
+
+After:
+main:     A──B
+feature:         └──C'──D'
+(C' and D' are new commits)
+
+Notes ⚠️
+
+Commit IDs change
+History rewritten
+Avoid on shared branches
+
+
+
+
+2️⃣ Conflict during rebase
+
+If conflict happens:
+
+# fix conflicts
+git add <file>
+git rebase --continue
+
+
+Abort if needed:
+
+git rebase --abort
+
+
+
+
+
+3️⃣ git rebase -i HEAD~n ⭐ Interactive Rebase
+git rebase -i HEAD~3
+
+What it does
+  Opens editor
+  Lets you edit history
+
+Example screen
+pick a1 Fix typo
+pick b2 Add validation
+pick c3 Debug logs
+
+
+Common actions
+| Action         | Meaning               |
+| -------------- | --------------------- |
+| `pick`         | keep commit           |
+| `s` / `squash` | merge with previous   |
+| `reword`       | change commit message |
+| `edit`         | modify commit         |
+| `drop`         | delete commit         |
+
+
+
+Squash example
+
+Before:
+
+pick a1 Fix typo
+pick b2 Add validation
+pick c3 Debug logs
+
+
+Change to:
+
+pick a1 Fix typo
+s b2 Add validation
+s c3 Debug logs
+
+
+Result:
+➡️ One clean commit
+
+
+
+
+
+When should you use Rebase? ✅
+
+✔ Cleaning local commits
+✔ Updating feature branch with main
+✔ Before opening a PR
+✔ Solo development
+
+
+When should you NOT use Rebase? ❌
+
+❌ On shared branches
+❌ On pushed commits others depend on
+❌ On main / develop (usually)
+
+
+
+Rebase vs Merge — Quick Table
+| Feature        | Merge     | Rebase    |
+| -------------- | --------- | --------- |
+| History        | Preserved | Rewritten |
+| Merge commit   | Yes       | No        |
+| Safe for teams | Yes       | No        |
+| Clean history  | Medium    | Excellent |
+| Risk           | Low       | High      |
+
+
+
+
+Interview One-Liner 💡
+
+Rebase rewrites history by replaying commits on a new base, while merge preserves history with a merge commit.
+
+
+Memory Trick 
+
+Merge = record history
+Rebase = rewrite history
+
+
+
