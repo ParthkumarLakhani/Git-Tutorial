@@ -1,0 +1,166 @@
+# Stashing (Temporary Storage)
+
+What is git stash ??
+git stash temporarily saves your local changes and gives you a clean working directory.
+
+Think of it as: “Put my unfinished work in a drawer, I’ll come back later.”
+
+
+What does stash save ?
+By default:
+
+✅ Tracked file changes
+❌ Untracked files
+❌ Ignored files
+
+(To include untracked: git stash -u)
+
+
+
+
+1️⃣ git stash
+
+What it does
+  Saves unstaged & staged changes
+  Resets working directory to last commit
+
+
+Example
+# you edited some files
+git status
+
+modified: app.js
+modified: config.js
+
+Save work:
+git stash
+
+Now:
+git status
+
+working tree clean
+
+
+Notes
+  Creates a stash entry
+  Does NOT commit
+  Changes are safe
+
+
+
+2️⃣ git stash list
+
+What it does
+  Shows all saved stashes
+
+stash@{0}: WIP on main: 3a1f9 Fix login
+stash@{1}: WIP on feature/cart
+
+
+Notes
+  stash@{0} is the most recent
+
+
+
+
+3️⃣ git stash apply
+
+What it does
+  Restores latest stash
+  Keeps stash in list
+
+
+Apply specific stash
+  git stash apply stash@{1}
+
+Restore staged files too
+  git stash apply --index
+
+Notes
+  Can cause conflicts
+  Safe (stash remains)
+
+
+
+4️⃣ git stash pop
+What it does
+  Applies stash
+  Deletes it from stash list
+
+
+Difference: apply vs pop
+| Command | Applies | Removes stash |
+| ------- | ------- | ------------- |
+| apply   | ✅      | ❌             |
+| pop     | ✅      | ✅             |
+
+
+5️⃣ git stash drop
+
+git stash drop stash@{0}
+
+What it does
+  Deletes a stash entry
+  Does NOT apply it
+
+
+Delete all stashes
+  git stash clear
+⚠️ Dangerous – cannot recover easily
+
+
+
+Real-World Scenarios 🧠
+
+Scenario 1: Urgent bug fix
+git stash
+git switch main
+# fix bug
+git commit -m "Hotfix"
+git switch feature
+git stash pop
+
+Scenario 2: Pull blocked by local changes
+git stash
+git pull
+git stash apply
+
+
+
+Professional Tips ⭐
+Name your stash
+git stash push -m "WIP login validation"
+
+Include untracked files
+git stash -u
+
+
+Common Mistakes ❌
+
+❌ Forgetting stash exists
+❌ Using stash instead of commit
+❌ Clearing stash accidentally
+
+
+Safety Rules 🛑
+
+✔ Use stash for short-term storage
+✔ Prefer commit for long-term work
+✔ Check git stash list regularly
+
+
+
+Interview One-Liner 💡
+git stash temporarily saves local changes without committing and restores a clean working directory.
+
+
+Quick Summary
+| Task           | Command           |
+| -------------- | ----------------- |
+| Save changes   | `git stash`       |
+| List stashes   | `git stash list`  |
+| Apply stash    | `git stash apply` |
+| Apply + remove | `git stash pop`   |
+| Delete stash   | `git stash drop`  |
+
+
