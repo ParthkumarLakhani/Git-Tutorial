@@ -1,0 +1,63 @@
+# What is Git ??
+  Git is a Distributed Version Control System (VCS).
+
+  It helps you:
+    Track code changes
+    Go back to previous versions
+    Work with multiple developers safely
+    Experiment without breaking production code
+
+
+  Without Git (problem)
+    You edit files → overwrite old code
+    No history
+    No collaboration safety
+    “final_final_v3_really_final.js” 😵
+
+  With Git (solution)
+    Every change is tracked
+    Every version is saved
+    You can undo mistakes
+    Teams can work together
+
+
+
+# What is gitHub ??
+GitHub is a cloud platform that hosts Git repositories. / GitHub = Cloud storage + collaboration for Git repositories
+
+
+Think like this:
+  Git = tool
+  GitHub = service/platform
+
+
+Other Git platforms:
+  GitHub (most popular)
+  GitLab
+  Bitbucket
+
+Why GitHub?
+  Remote backup of code
+  Collaboration
+  Pull Requests (PR)
+  Code review
+  CI/CD
+  Issues, Projects, Wikis
+
+
+
+Git vs GitHub
+
+| Git               | GitHub             |
+| ----------------- | ------------------ |
+| Installed locally | Cloud platform     |
+| Tracks code       | Hosts repositories |
+| Works offline     | Needs internet     |
+| CLI based         | Web + CLI          |
+
+
+
+
+You can use Git without GitHub
+You cannot use GitHub without Git
+
