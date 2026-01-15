@@ -90,6 +90,9 @@ chore: update dependencies
 
 
 git commit --amend ⭐ VERY IMPORTANT
+
+git commit --amend -m "Correct commit message"
+
 This modifies the most recent commit instead of creating a new one. ➡️ Think: “Oops, let me fix my last commit.”
 
 Please don't use this. This is history rewriting
@@ -109,13 +112,27 @@ git commit = actually save it
 
 
 
+// when you commit scenario ??
+1. when you commit by mistake ?? how can you handle that situation ??
+2. after commit you realize that i want update the message then ??
+3. how can you hadle 2-3 commit before ??
+
+
+Note:
+Let's say you're commit msg is wrong you want to change it how can you change it ??
+  In general (if working directoy is clean) you think that again i do git commit -m 'write updated msg' but this is not correct. because in working directory no changes so you can't commit .
+then how can i do ??  
+
+
+
+
 
 git rm
 
 | Command                    | Removes from Git | Deletes local file |
 | -------------------------- | ---------------- | ------------------ |
 | `git rm file.txt`          | ✅ Yes            | ✅ Yes              |
-| `git rm --cached file.txt` | ✅ Yes            | ❌ No               |
+| `git rm --cached file.txt` | ✅ Yes            | ❌ No               |   // need to check
 
 
 
@@ -242,7 +259,7 @@ def456 Revert "Add payment logic"
 
 
 Notes
-Does NOT delete history
+Does NOT delete history    but it will delete that commit changes. how can got that ??
 Very safe
 Used in production
 
