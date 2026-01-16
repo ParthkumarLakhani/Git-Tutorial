@@ -164,7 +164,9 @@ Rebase = rewrite history
 
 Pro Tip: Merge for shared work (preserves history); Rebase for local cleanup.
 
+Most of the time we never used rebase in main or master branch.
 
+Ensure you are on the branch you want to rebase
 
 
 

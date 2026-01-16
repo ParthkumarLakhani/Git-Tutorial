@@ -137,3 +137,6 @@ Golden Rules 🛑
 ✔ Push tags explicitly
 ✔ Keep tags immutable
 
+
+
+in general developer are not used tag, delivery manager or product manager when they have to new release that time they wil used it.
